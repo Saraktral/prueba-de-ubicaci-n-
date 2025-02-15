@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar Ubicación</title>
+    <script>
+        function enviarUbicacion() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    let lat = position.coords.latitude;
+                    let lon = position.coords.longitude;
+                    let mensaje = `Hola, esta es mi ubicación: https://www.google.com/maps?q=${lat},${lon}`;
+                    let telefono = "573213502112"; // Reemplaza con tu número de WhatsApp
+                    let url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+                    window.location.href = url;
+                }, function(error) {
+                    alert("No se pudo obtener la ubicación. Asegúrate de habilitar la ubicación en tu dispositivo.");
+                });
+            } else {
+                alert("Tu navegador no soporta la geolocalización.");
+            }
+        }
+    </script>
+</head>
+<body onload="enviarUbicacion()">
+    <h2>Obteniendo ubicación...</h2>
+</body>
+</html>
